@@ -1,0 +1,28 @@
+[Wed, 16 Jan 19 20:30:48 +0000][ERROR] Call to undefined method ::gettype()
+[Wed, 16 Jan 19 20:32:07 +0000][ERROR] Call to undefined method ::gettype()
+[Wed, 16 Jan 19 20:32:14 +0000][ERROR] Call to undefined method ::gettype()
+[Wed, 16 Jan 19 20:32:28 +0000][ERROR] Call to undefined method ::gettype()
+[Wed, 16 Jan 19 20:32:53 +0000][ERROR] Call to undefined method ::gettype()
+[Wed, 16 Jan 19 20:34:12 +0000][ERROR] The method 'setConnection' doesn't exist on model 'Sysnews\Models\Users'
+[Wed, 16 Jan 19 20:35:02 +0000][ERROR] Call to undefined method ::gettype()
+[Wed, 16 Jan 19 20:45:45 +0000][ERROR] Class 'Phalcon\Response' not found
+[Wed, 16 Jan 19 20:56:03 +0000][ERROR] syntax error, unexpected '$response' (T_VARIABLE)
+[Wed, 16 Jan 19 20:56:08 +0000][ERROR] Call to a member function toArray() on null
+[Wed, 16 Jan 19 20:58:12 +0000][ERROR] syntax error, unexpected 'print_r' (T_STRING)
+[Wed, 16 Jan 19 20:58:42 +0000][ERROR] syntax error, unexpected 'array_map' (T_STRING)
+[Wed, 16 Jan 19 20:58:51 +0000][ERROR] syntax error, unexpected '$a' (T_VARIABLE)
+[Wed, 16 Jan 19 20:59:29 +0000][ERROR] Too few arguments to function Sysnews\Controllers\call(), 0 passed in /app/controllers/UserController.php on line 20 and exactly 1 expected
+[Wed, 16 Jan 19 21:03:02 +0000][ERROR] syntax error, unexpected '}', expecting ';'
+[Wed, 16 Jan 19 21:03:13 +0000][ERROR] syntax error, unexpected '}', expecting ';'
+[Wed, 16 Jan 19 21:05:49 +0000][ERROR] syntax error, unexpected ')'
+[Wed, 16 Jan 19 21:07:10 +0000][ERROR] syntax error, unexpected ';', expecting ']'
+[Wed, 16 Jan 19 21:07:32 +0000][ERROR] Call to a member function toArray() on array
+[Wed, 16 Jan 19 21:14:14 +0000][ERROR] Argument 1 passed to Phalcon\Mvc\Model::query() must implement interface Phalcon\DiInterface or be null, string given
+[Wed, 16 Jan 19 21:14:58 +0000][ERROR] Call to undefined method Phalcon\Mvc\Model\Criteria::createQuery()
+[Wed, 16 Jan 19 21:15:18 +0000][ERROR] Call to undefined method Phalcon\Mvc\Model\Criteria::createQuery()
+[Wed, 16 Jan 19 21:15:30 +0000][ERROR] The static method 'createQuery' doesn't exist
+[Wed, 16 Jan 19 21:16:29 +0000][ERROR] Call to undefined method Phalcon\Mvc\Model\Criteria::executeQuery()
+[Wed, 16 Jan 19 21:16:40 +0000][ERROR] Call to undefined method Phalcon\Mvc\Model\Criteria::executeQuery()
+[Wed, 16 Jan 19 21:21:26 +0000][ERROR] syntax error, unexpected '$response' (T_VARIABLE), expecting function (T_FUNCTION) or const (T_CONST)
+[Wed, 16 Jan 19 21:24:34 +0000][ERROR] SQLSTATE[HY093]: Invalid parameter number: no parameters were bound
+[Wed, 16 Jan 19 21:24:59 +0000][ERROR] SQLSTATE[HY093]: Invalid parameter number: no parameters were bound
