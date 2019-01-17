@@ -5,12 +5,34 @@ namespace Sysnews\Controllers;
 use Sysnews\Models\Noticias;
 use Phalcon\Http\Response;
 
+
 class NoticiasController extends BaseController
 {
     public function index(): Response
     {
- 
-        return $this->response(Noticias::find());
+        $datos = $this->request->getQuery();
+        unset($datos["_url"]);
+        unset($datos["page"]);
+        unset($datos["count"]);
+        $first_element=true;
+
+        $noticias = Noticias::query();
+
+        foreach($datos as $key=>$value)
+        {
+            if($first_element){
+                 $noticias->where("$key = :$key:");
+
+             }else{
+                 $noticias->andWhere("$key = :$key:");
+            }
+            
+            $first_element = false;
+        } 
+        
+        $noticias->bind($datos);
+        $datos =$this->paginate($noticias->execute()->toArray(),$this->request->getQuery('page'),$this->request->getQuery('count'));
+        return $this->response($datos);
     }
 
     public function show($id): Response
