@@ -28,6 +28,7 @@ $settings = [
                 '/auth/user:POST,PUT',
                 '/auth/application',
                 '/auth/',
+                '/noticias/',
             ]
          ],
     'mysetting' => 'the-value',

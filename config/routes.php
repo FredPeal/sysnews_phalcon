@@ -7,6 +7,9 @@ use Phalcon\Mvc\Micro\Collection as MicroCollection;
 
 
 //Users
+
+$app->get('/',function(){ echo 'Hello'; });
+ 
 $users = new MicroCollection();
 $users->setHandler(new \Sysnews\Controllers\UserController());
 $users->setPrefix('/users');

@@ -83,3 +83,6 @@
 [Thu, 17 Jan 19 16:59:42 +0000][ERROR] Call to undefined method Phalcon\Paginator\Adapter\NativeArray::toArray()
 [Thu, 17 Jan 19 17:04:51 +0000][ERROR] Call to undefined method Sysnews\Controllers\NoticiasController::request()
 [Thu, 17 Jan 19 17:06:25 +0000][ERROR] Column 'count' doesn't belong to any of the selected models (1), when preparing: SELECT [Sysnews\Models\Noticias].* FROM [Sysnews\Models\Noticias] WHERE (iduser = :iduser:) AND (count = :count:)
+[Thu, 17 Jan 19 19:12:41 +0000][ERROR] syntax error, unexpected '}', expecting ',' or ';'
+[Thu, 17 Jan 19 19:13:00 +0000][ERROR] syntax error, unexpected '}', expecting ',' or ';'
+[Thu, 17 Jan 19 19:13:19 +0000][ERROR] Collection requires a main handler
