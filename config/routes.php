@@ -24,6 +24,19 @@ $auth->setPrefix('/auth');
 $auth->post('/','auth');
 
 
+
+//Noticias
+$noticias = new MicroCollection();
+$noticias->setHandler(new \Sysnews\Controllers\NoticiasController());
+$noticias->setPrefix('/noticias');
+$noticias->get('/','index');
+$noticias->get('/{id}','show');
+$noticias->post('/','store');
+$noticias->put('/{id}','update');
+$noticias->delete('/{id}','delete');
+$app->mount($noticias);
+
+
 $app->mount($auth);
 
 $app->notFound(function () use ($app) {

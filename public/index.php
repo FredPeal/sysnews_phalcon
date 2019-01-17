@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
+use Dmkit\Phalcon\Auth\Middleware\Micro as AuthMicro;
 
 try {
     $config = require __DIR__ . '/../config/config.php';
@@ -15,8 +16,9 @@ try {
     
     require __DIR__ .'/../config/routes.php';
 
+    $auth = new AuthMicro($app, $config->jwt->toArray());
+
      
-    // $app->handle();
     $app->handle();
 } catch (Throwable $e) {
     $response = new Phalcon\Http\Response();

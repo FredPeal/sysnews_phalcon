@@ -32,3 +32,31 @@
 [Thu, 17 Jan 19 13:28:18 +0000][ERROR] Call to a member function getJsonRawBody() on null
 [Thu, 17 Jan 19 13:31:54 +0000][ERROR] Call to undefined method Phalcon\Http\Request::toArray()
 [Thu, 17 Jan 19 13:33:28 +0000][ERROR] Call to a member function toArray() on array
+[Thu, 17 Jan 19 14:15:23 +0000][ERROR] Argument 2 passed to Dmkit\Phalcon\Auth\Middleware\Micro::__construct() must be of the type array or null, object given, called in /app/public/index.php on line 19
+[Thu, 17 Jan 19 14:31:17 +0000][ERROR] syntax error, unexpected '$app' (T_VARIABLE)
+[Thu, 17 Jan 19 14:31:24 +0000][ERROR] syntax error, unexpected ')', expecting '('
+[Thu, 17 Jan 19 14:36:21 +0000][ERROR] syntax error, unexpected '$app' (T_VARIABLE)
+[Thu, 17 Jan 19 14:37:33 +0000][ERROR] Syntax error, unexpected token LIMIT, near to ' :APL0:', when parsing: SELECT [Sysnews\Models\Users].* FROM [Sysnews\Models\Users] WHERE email =  LIMIT :APL0: (87)
+[Thu, 17 Jan 19 14:37:57 +0000][ERROR] Scanning error before 'gmail.com LIMIT ...' when parsing: SELECT [Sysnews\Models\Users].* FROM [Sysnews\Models\Users] WHERE email = frederickpeal@gmail.com LIMIT :APL0: (110)
+[Thu, 17 Jan 19 14:38:19 +0000][ERROR] Class 'Sysnews\Controllers\Response' not found
+[Thu, 17 Jan 19 15:09:09 +0000][ERROR] syntax error, unexpected '$noticia' (T_VARIABLE)
+[Thu, 17 Jan 19 15:09:16 +0000][ERROR] syntax error, unexpected '$noticia' (T_VARIABLE)
+[Thu, 17 Jan 19 15:24:50 +0000][ERROR] Call to undefined method Phalcon\Http\Response::setStatus()
+[Thu, 17 Jan 19 15:38:37 +0000][ERROR] Class 'Sysnews\Controllers\Response' not found
+[Thu, 17 Jan 19 15:38:56 +0000][ERROR] Call to a member function toArray() on null
+[Thu, 17 Jan 19 15:39:13 +0000][ERROR] Call to a member function toArray() on array
+[Thu, 17 Jan 19 15:43:22 +0000][ERROR] syntax error, unexpected ';'
+[Thu, 17 Jan 19 15:46:09 +0000][ERROR] Return value of Sysnews\Controllers\NoticiasController::index() must be an instance of Sysnews\Controllers\Response, instance of Phalcon\Http\Response returned
+[Thu, 17 Jan 19 15:48:04 +0000][ERROR] Class 'Sysnews\Controllers\Exception' not found
+[Thu, 17 Jan 19 15:48:19 +0000][ERROR] vista is required
+[Thu, 17 Jan 19 15:54:23 +0000][ERROR] Return value of Sysnews\Controllers\NoticiasController::update() must be an instance of Phalcon\Http\Response, none returned
+[Thu, 17 Jan 19 15:56:04 +0000][ERROR] titulo is required
+[Thu, 17 Jan 19 15:57:21 +0000][ERROR] Cannot use object of type stdClass as array
+[Thu, 17 Jan 19 15:57:46 +0000][ERROR] Return value of Sysnews\Controllers\NoticiasController::update() must be an instance of Phalcon\Http\Response, none returned
+[Thu, 17 Jan 19 15:58:05 +0000][ERROR] Call to undefined method stdClass::toArray()
+[Thu, 17 Jan 19 15:58:13 +0000][ERROR] Return value of Sysnews\Controllers\NoticiasController::update() must be an instance of Phalcon\Http\Response, none returned
+[Thu, 17 Jan 19 15:58:26 +0000][ERROR] Cannot use object of type stdClass as array
+[Thu, 17 Jan 19 15:58:35 +0000][ERROR] Return value of Sysnews\Controllers\NoticiasController::update() must be an instance of Phalcon\Http\Response, none returned
+[Thu, 17 Jan 19 15:59:07 +0000][ERROR] Return value of Sysnews\Controllers\NoticiasController::update() must be an instance of Phalcon\Http\Response, none returned
+[Thu, 17 Jan 19 15:59:27 +0000][ERROR] Cannot use object of type stdClass as array
+[Thu, 17 Jan 19 16:00:03 +0000][ERROR] Return value of Sysnews\Controllers\NoticiasController::update() must be an instance of Phalcon\Http\Response, none returned

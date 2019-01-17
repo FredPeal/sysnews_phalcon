@@ -6,9 +6,9 @@ use Phalcon\Mvc\Controller;
 use \Sysnews\Models\Users;
 use Phalcon\Http\Response;
 
-class UserController extends Controller 
+class UserController extends BaseController 
 {
-    public function index()
+    public function index(): Response
     {
        
         $users = Users::find();
@@ -23,20 +23,17 @@ class UserController extends Controller
 
   
 
-        $response = new Response();
-        $response->setJsonContent($users);
-        return $response;
+      return $this->response($users);
+
     }
 
-    public function show($id)
+    public function show($id): Response
     {
-        $users = Users::find("id = $id");
-        $response = new Response();
-        $response->setJsonContent($users->toArray());
-        return $response;
+        // $users = ;
+        return $this->response(Users::findFirst($id));
     }
 
-    public function store()
+    public function store(): Response
     {
         $user = new Users();
         $user->name = $this->request->getPost('name');
@@ -44,20 +41,17 @@ class UserController extends Controller
         $user->pass = password_hash($this->request->getPost('pass'), PASSWORD_DEFAULT);
         $user->created_at = date('Y/m/d H:i:s');
         $user->update_at = date('Y/m/d H:i:s');
-        //var_dump($user);
-        //$user->create();
-        if ($user->save() == false) {
-            echo 'Se registro un error';
-            foreach ($robot->getMessages() as $message) {
-              echo message;
-            }
-           } else {
-            echo 'Agregado exitosamente';
-           } 
+
+        if (!$user->save()) {
+
+            throw new Exception(current($user->getMessages()));
+        }
+
+        return $this->response($user->toArray());
 
     }
 
-    public function update($id)
+    public function update($id): Response
     {
         $data = $this->request->getJsonRawBody();
 
@@ -65,7 +59,13 @@ class UserController extends Controller
         $user->name = $data->name;
         $user->email = $data->email;
         $user->update_at = date('Y/m/d H:i:s');
-        $user->save();
+
+        if (!$user->save()) {
+
+            throw new Exception(current($user->getMessages()));
+        }
+
+        return $this->response($user->toArray());
 
     }
 
@@ -73,5 +73,7 @@ class UserController extends Controller
     {
         $user = Users::findFirst(["id = $id"]);
         $user->delete();
+
+        return $this->response(["message"=>"Eliminado correctamente"]);
     }
 }
