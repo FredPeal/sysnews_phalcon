@@ -3,6 +3,7 @@
         "phalcon/devtools": "^3.0.3"
     },
     "require": {
-        "robmorgan/phinx": "^0.10.6"
+        "robmorgan/phinx": "^0.10.6",
+        "dmkit/phalcon-jwt-auth": "^1.0"
     }
 }

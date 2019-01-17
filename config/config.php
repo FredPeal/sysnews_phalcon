@@ -15,6 +15,21 @@ $settings = [
         'viewsDir'       => '../app/views/',
         'production' => 1,
     ],
+    'jwt' => [
+        'secretKey' => '923753F2317FC1EE5B52DF23951B1',
+        'payload' => [
+                'exp' => 1440,
+                'iss' => 'phalcon-jwt-auth'
+            ],
+         'ignoreUri' => [
+                '/',
+                'regex:/application/',
+                'regex:/users/:POST,PUT',
+                '/auth/user:POST,PUT',
+                '/auth/application',
+                '/auth/',
+            ]
+         ],
     'mysetting' => 'the-value',
 ];
 
