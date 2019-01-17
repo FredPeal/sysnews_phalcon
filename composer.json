@@ -1,7 +1,8 @@
 {
     "require-dev": {
         "phalcon/devtools": "^3.0.3",
-        "codeception/codeception": "^2.5"
+        "codeception/codeception": "^2.5",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "require": {
         "robmorgan/phinx": "^0.10.6",

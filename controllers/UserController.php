@@ -44,7 +44,7 @@ class UserController extends BaseController
 
         if (!$user->save()) {
 
-            throw new Exception(current($user->getMessages()));
+            throw new \Exception(current($user->getMessages()));
         }
 
         return $this->response($user->toArray());
