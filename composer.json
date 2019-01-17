@@ -5,6 +5,7 @@
     },
     "require": {
         "robmorgan/phinx": "^0.10.6",
-        "dmkit/phalcon-jwt-auth": "^1.0"
+        "dmkit/phalcon-jwt-auth": "^1.0",
+        "flow/jsonpath": "^0.4.0"
     }
 }
