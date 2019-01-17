@@ -57,13 +57,21 @@ class UserController extends Controller
 
     }
 
-    public function update()
+    public function update($id)
     {
+        $data = $this->request->getJsonRawBody();
+
+        $user = Users::findFirst(["id = $id"]);
+        $user->name = $data->name;
+        $user->email = $data->email;
+        $user->update_at = date('Y/m/d H:i:s');
+        $user->save();
 
     }
 
-    public function delete()
+    public function delete($id)
     {
-
+        $user = Users::findFirst(["id = $id"]);
+        $user->delete();
     }
 }

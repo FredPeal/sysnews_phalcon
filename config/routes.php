@@ -11,6 +11,8 @@ $users->setPrefix('/users');
 $users->get('/','index');
 $users->get('/{id}','show');
 $users->post('/','store');
+$users->put('/{id}','update');
+$users->delete('/{id}','delete');
 
 $app->mount($users);
 
