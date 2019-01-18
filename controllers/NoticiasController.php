@@ -17,10 +17,22 @@ class NoticiasController extends BaseController
         unset($datos['_url'], $datos['page'], $datos['count']);
 
         $noticias = Noticias::find([
-            'conditions' => "titulo = '{$datos['titulo']}'",
-         ]);
+            'conditions' => 'titulo = :titulo:',
+            'bind' => [
+                'titulo' => $datos['titulo'],
+            ],
+        ]);
 
-        return $this->response($noticias->toArray());
+        $result = [];
+
+        foreach ($noticias as $noticia) {
+            $data = $noticia->toArray();
+            $data['user'] = $noticia->users;
+
+            $result[] = $data;
+        }
+
+        return $this->response($result);
     }
 
     /**

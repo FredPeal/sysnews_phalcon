@@ -6,7 +6,7 @@ use Dmkit\Phalcon\Auth\Middleware\Micro as AuthMicro;
 $dotenv = Dotenv\Dotenv::create(__DIR__ . '/../');
 $dotenv->load();
 
-//try {
+try {
     $config = require __DIR__ . '/../config/config.php';
 
     require __DIR__ . '/../config/loader.php';
@@ -22,29 +22,29 @@ $dotenv->load();
     $auth = new AuthMicro($app, $config->jwt->toArray());
 
     $app->handle();
-// } catch (Throwable $e) {
-//     $response = new Phalcon\Http\Response();
-//     if ($e->getMessage() == 'No records were found.') {
-//         $response->setStatusCode(404, 'OK');
-//     } else {
-//         $response->setStatusCode(404, 'Not Found');
-//     }
-//     $response->setContentType('application/json');
-//     $response->setJsonContent([
-//         'status' => [
-//             'type' => 'FAILED',
-//             'message' => $e->getMessage(),
-//             'trace' => !$config->app->production ? $e->getTraceAsString() : null,
-//         ],
-//     ]);
+} catch (Throwable $e) {
+    $response = new Phalcon\Http\Response();
+    if ($e->getMessage() == 'No records were found.') {
+        $response->setStatusCode(404, 'OK');
+    } else {
+        $response->setStatusCode(404, 'Not Found');
+    }
+    $response->setContentType('application/json');
+    $response->setJsonContent([
+        'status' => [
+            'type' => 'FAILED',
+            'message' => $e->getMessage(),
+            'trace' => !$config->app->production ? $e->getTraceAsString() : null,
+        ],
+    ]);
 
-//     if ($config->app->production) {
-//         // Log the exception
-//         $di->getLog()->error($e->getMessage(), $e->getTrace());
-//     }
+    if ($config->app->production) {
+        // Log the exception
+        $di->getLog()->error($e->getMessage(), $e->getTrace());
+    }
 
-//     $response->send();
-// }
+    $response->send();
+}
 
 // $app->get(
 //     '/',
