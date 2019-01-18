@@ -4,15 +4,15 @@ use Phalcon\Config;
 
 $settings = [
     'database' => [
-        'host'     => env('DB_HOST'),
+        'host' => env('DB_HOST'),
         'username' => env('DB_USER'),
         'password' => env('DB_PASS'),
-        'dbname'   => env('DB_DATABASE'),
+        'dbname' => env('DB_DATABASE'),
     ],
      'app' => [
         'controllersDir' => '../app/controllers/',
-        'modelsDir'      => '../app/models/',
-        'viewsDir'       => '../app/views/',
+        'modelsDir' => '../app/models/',
+        'viewsDir' => '../app/views/',
         'production' => 1,
     ],
     'jwt' => [

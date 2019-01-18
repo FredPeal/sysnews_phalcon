@@ -93,3 +93,6 @@
 [Thu, 17 Jan 19 20:30:04 +0000][ERROR] Class 'Sysnews\Controllers\Exception' not found
 [Thu, 17 Jan 19 20:30:22 +0000][ERROR] name is required
 [Thu, 17 Jan 19 21:11:42 +0000][ERROR] name is required
+[Fri, 18 Jan 19 15:40:09 +0000][ERROR] syntax error, unexpected '$noticias' (T_VARIABLE)
+[Fri, 18 Jan 19 15:40:59 +0000][ERROR] Model 'users' could not be loaded
+[Fri, 18 Jan 19 16:10:03 +0000][ERROR] Wrong number of parameters

@@ -17,6 +17,7 @@ class Noticias extends \Phalcon\Mvc\Model
     {
         // $this->setSource('users');
         $this->setConnectionService('db');
+        $this->belongsTo('iduser', 'Sysnews\Models\Users', 'id', ['alias' => 'users']);
     }
 
     public function getSource()

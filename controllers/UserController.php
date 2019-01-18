@@ -2,32 +2,26 @@
 
 namespace Sysnews\Controllers;
 
-use Phalcon\Mvc\Controller;
 use \Sysnews\Models\Users;
 use Phalcon\Http\Response;
 
-class UserController extends BaseController 
+class UserController extends BaseController
 {
     public function index(): Response
     {
-       
         $users = Users::find();
 
         $users = array_map(
-                            function($value)
-                            {
-                                return ['name'=>$value['name'],'email'=>$value['email'],'created_at'=>$value['created_at'],'updated_at'=>$value['update_at']];
-                            },$users->toArray()
+                            function ($value) {
+                                return ['name' => $value['name'], 'email' => $value['email'], 'created_at' => $value['created_at'], 'updated_at' => $value['update_at']];
+                            },
+            $users->toArray()
                         );
-        
 
-  
-
-      return $this->response(['items'=>$users]);
-
+        return $this->response(['items' => $users]);
     }
 
-    public function show($id): Response
+    public function show(Int $id): Response
     {
         // $users = ;
         return $this->response(Users::findFirst($id));
@@ -43,15 +37,13 @@ class UserController extends BaseController
         $user->update_at = date('Y/m/d H:i:s');
 
         if (!$user->save()) {
-
             throw new \Exception(current($user->getMessages()));
         }
 
         return $this->response($user->toArray());
-
     }
 
-    public function update($id): Response
+    public function update(Int $id): Response
     {
         $data = $this->request->getJsonRawBody();
 
@@ -61,19 +53,17 @@ class UserController extends BaseController
         $user->update_at = date('Y/m/d H:i:s');
 
         if (!$user->save()) {
-
             throw new Exception(current($user->getMessages()));
         }
 
         return $this->response($user->toArray());
-
     }
 
-    public function delete($id)
+    public function delete(Int $id)
     {
         $user = Users::findFirst(["id = $id"]);
         $user->delete();
 
-        return $this->response(["message"=>"Eliminado correctamente"]);
+        return $this->response(['message' => 'Eliminado correctamente']);
     }
 }
