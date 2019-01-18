@@ -7,6 +7,10 @@ use Phalcon\Http\Response;
 
 class AuthController extends \Phalcon\Mvc\Controller
 {
+    /**
+     * Busca un usuario en la base de datos que coincida con ese emai
+     * Luego compara la contraseña , si es correcta entonces genera el token con el id, email y nombre , luego retorna el token
+     */
     public function auth()
     {
         $email = $this->request->getPost('email');

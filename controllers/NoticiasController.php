@@ -7,33 +7,25 @@ use Phalcon\Http\Response;
 
 class NoticiasController extends BaseController
 {
+    /**
+     * Busca en la base de datos nas noticias que coincidan con el titulo, deben llevar mas filtros , pero aun no funcionan
+     *
+     */
     public function index(): Response
     {
         $datos = $this->request->getQuery();
         unset($datos['_url'], $datos['page'], $datos['count']);
 
-        $first_element = true;
+        $noticias = Noticias::find([
+            'conditions' => "titulo = '{$datos['titulo']}'",
+         ]);
 
-        $noticias = Noticias::query();
-
-        foreach ($datos as $key => $value) {
-            if ($first_element) {
-                $noticias->where("$key = :$key:");
-            } else {
-                $noticias->andWhere("$key = :$key:");
-            }
-
-            $first_element = false;
-        }
-
-        $noticias->bind($datos);
-        $noticias->join('Sysnews\Models\Users', 'Sysnews\Models\Users.id = iduser');
-        $noticias->columns(['titulo', 'contenido', 'Sysnews\Models\Users.created_at', 'vista', 'name']);
-
-        $datos = $this->paginate($noticias->execute()->toArray(), $this->request->getQuery('page'), $this->request->getQuery('count'));
-        return $this->response($datos);
+        return $this->response($noticias->toArray());
     }
 
+    /**
+     * Funcion para buscar noticias por el id
+     */
     public function show(Int $id): Response
     {
         $noticia = Noticias::findFirst($id);
@@ -43,6 +35,9 @@ class NoticiasController extends BaseController
         return $this->response($noticia);
     }
 
+    /**
+     * Funcion para almacenar noticias, en caso de que no funcione captura la execepcion y la devuelve
+     */
     public function store(): Response
     {
         $noticia = new Noticias();
@@ -61,6 +56,10 @@ class NoticiasController extends BaseController
         return $this->response($noticia->toArray());
     }
 
+    /**
+     * Funcion para actualizar noticas por el ID, recibe un id copmo parametro
+     * OJO , deben enviar los datos en Json mediante PUT o no funcionara
+     */
     public function update(Int $id): Response
     {
         $noticia = Noticias::findFirst($id);
@@ -77,6 +76,9 @@ class NoticiasController extends BaseController
         return $this->response($noticia->toArray());
     }
 
+    /**
+     * Funcion para borrar una noticia
+     */
     public function delete($id): Response
     {
         $noticia = Noticias::findFirst($id);

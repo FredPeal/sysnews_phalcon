@@ -7,26 +7,28 @@ use Phalcon\Http\Response;
 
 class UserController extends BaseController
 {
+    /**
+     * La funcion index en usuarios busca los usuarios pero no la contraseña
+     */
     public function index(): Response
     {
-        $users = Users::find();
-
-        $users = array_map(
-                            function ($value) {
-                                return ['name' => $value['name'], 'email' => $value['email'], 'created_at' => $value['created_at'], 'updated_at' => $value['update_at']];
-                            },
-            $users->toArray()
-                        );
+        $users = Users::find(['columns' => 'id,name,email']);
 
         return $this->response(['items' => $users]);
     }
 
+    /**
+     * La funcion show recibe el id y filtra los resultados, pero no devuelve la contraseña
+    */
     public function show(Int $id): Response
     {
-        // $users = ;
-        return $this->response(Users::findFirst($id));
+        $users = Users::find(['conditions' => "id = $id", 'columns' => 'id,name,email']);
+        return $this->response($users->toArray());
     }
 
+    /**
+     * Funcion para crear nuevos usuarios
+     */
     public function store(): Response
     {
         $user = new Users();
@@ -43,6 +45,9 @@ class UserController extends BaseController
         return $this->response($user->toArray());
     }
 
+    /**
+     * Funcion para modificar usuarios
+     */
     public function update(Int $id): Response
     {
         $data = $this->request->getJsonRawBody();
@@ -59,6 +64,9 @@ class UserController extends BaseController
         return $this->response($user->toArray());
     }
 
+    /**
+     * Funcion para eliminar usuarios, recibe el id como parametro
+     */
     public function delete(Int $id)
     {
         $user = Users::findFirst(["id = $id"]);
