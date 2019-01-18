@@ -4,10 +4,10 @@ use Phalcon\Config;
 
 $settings = [
     'database' => [
-        'host'     => '172.21.0.18',
-        'username' => 'root',
-        'password' => 'xiECcbe2Fe',
-        'dbname'   => 'sysnews',
+        'host'     => env('DB_HOST'),
+        'username' => env('DB_USER'),
+        'password' => env('DB_PASS'),
+        'dbname'   => env('DB_DATABASE'),
     ],
      'app' => [
         'controllersDir' => '../app/controllers/',
@@ -16,10 +16,10 @@ $settings = [
         'production' => 1,
     ],
     'jwt' => [
-        'secretKey' => '923753F2317FC1EE5B52DF23951B1',
+        'secretKey' => env('JWT_SECRET_KEY'),
         'payload' => [
-                'exp' => 1440,
-                'iss' => 'phalcon-jwt-auth'
+                'exp' => env('JWT_EXP'),
+                'iss' => env('JWT_ISS')
             ],
          'ignoreUri' => [
                 '/',

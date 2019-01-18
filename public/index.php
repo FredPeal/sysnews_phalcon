@@ -2,6 +2,8 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 use Dmkit\Phalcon\Auth\Middleware\Micro as AuthMicro;
+$dotenv = Dotenv\Dotenv::create(__DIR__. '/../');
+$dotenv->load();
 
 try {
     $config = require __DIR__ . '/../config/config.php';
