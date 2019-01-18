@@ -1,3 +1,4 @@
 <?php 
-$I = new ApiTester($scenario);
-$I->wantTo('perform actions and see result');
+include 'Test.php';
+$I->sendGet('/noticias/1');
+$I->seeResponseMatchesJsonType(["titulo"=>"string"]);

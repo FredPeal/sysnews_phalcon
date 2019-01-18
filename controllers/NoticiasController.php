@@ -66,7 +66,7 @@ class NoticiasController extends BaseController
     {
         $noticia = Noticias::findFirst($id);
         $data = $this->request->getJsonRawBody();
-        var_dump($data->titulo);
+        
         
          
         $noticia->titulo = $data->titulo;
@@ -79,8 +79,7 @@ class NoticiasController extends BaseController
 
         return $this->response($noticia->toArray());
 
-        $this->response($noticia);
-    }
+     }
 
     public function delete(): Response
     {
