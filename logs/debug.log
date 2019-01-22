@@ -20,3 +20,16 @@
 [Tue, 22 Jan 19 17:52:48 +0000][EMERGENCY] Esta noticia no le pertence
 [Tue, 22 Jan 19 17:54:20 +0000][EMERGENCY] Esta noticia no le pertence
 [Tue, 22 Jan 19 17:55:03 +0000][EMERGENCY] Esta noticia no le pertence 47 43
+[Tue, 22 Jan 19 19:07:49 +0000][EMERGENCY] Syntax error, unexpected token AND, near to ' titulo = :titulo:', when parsing: SELECT [Sysnews\Models\Noticias].* FROM [Sysnews\Models\Noticias] WHERE AND titulo = :titulo: (93)
+[Tue, 22 Jan 19 19:08:30 +0000][EMERGENCY] Syntax error, unexpected token AND, near to ' titulo = :titulo:', when parsing: SELECT [Sysnews\Models\Noticias].* FROM [Sysnews\Models\Noticias] WHERE  AND titulo = :titulo: (94)
+[Tue, 22 Jan 19 19:19:36 +0000][EMERGENCY] SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[Tue, 22 Jan 19 19:48:02 +0000][EMERGENCY] Class 'Sysnews\Models\Validation' not found
+[Tue, 22 Jan 19 19:48:40 +0000][EMERGENCY] Return value of Sysnews\Models\Users::validation() must be an instance of Phalcon\Validation, none returned
+[Tue, 22 Jan 19 19:48:55 +0000][EMERGENCY] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'cantasa-someone@example.com' for key 'name'
+[Tue, 22 Jan 19 19:49:37 +0000][EMERGENCY] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'cantasa-someone@example.com' for key 'name'
+[Tue, 22 Jan 19 19:50:26 +0000][EMERGENCY] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'cantasa-someone@example.com' for key 'name'
+[Tue, 22 Jan 19 19:51:35 +0000][EMERGENCY] email must be unique
+[Tue, 22 Jan 19 19:51:49 +0000][EMERGENCY] email, name must be unique
+[Tue, 22 Jan 19 19:52:09 +0000][EMERGENCY] email, name Deben ser unicos
+[Tue, 22 Jan 19 19:52:15 +0000][EMERGENCY] email, name deben ser unicos
+[Tue, 22 Jan 19 19:54:04 +0000][EMERGENCY] The e-mail is not valid

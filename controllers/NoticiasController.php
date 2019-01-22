@@ -5,6 +5,7 @@ namespace Sysnews\Controllers;
 use Sysnews\Models\Noticias;
 use Phalcon\Http\Response;
 use Exception;
+use Phalcon\Filter;
 
 class NoticiasController extends BaseController
 {
@@ -17,11 +18,11 @@ class NoticiasController extends BaseController
     {
         $datos = ['true' => 1];
 
-        $query = '1 = :true:';
+        $query = '1 = :true: ';
 
         if ($this->request->has('titulo') && !empty($this->request->getQuery('titulo'))) {
-            $datos['titulo'] = $this->request->getQuery('titulo');
-            $query = 'AND titulo = :titulo:';
+            $datos['titulo'] = $this->request->getQuery('titulo', 'string');
+            $query = $query . 'AND titulo = :titulo:';
         }
 
         if ($this->request->has('contenido') && !empty($this->request->getQuery('contenido'))) {
@@ -86,8 +87,8 @@ class NoticiasController extends BaseController
     {
         $noticia = new Noticias();
         $noticia->iduser = $this->auth->data('sub');
-        $noticia->titulo = $this->request->getPost('titulo');
-        $noticia->contenido = $this->request->getPost('contenido');
+        $noticia->titulo = $this->request->getPost('titulo', 'string');
+        $noticia->contenido = $this->request->getPost('contenido', 'string');
         $noticia->created_at = date('Y/m/d H:i:s');
         $noticia->update_at = date('Y/m/d H:i:s');
         $noticia->soft_delete = 0;
@@ -113,7 +114,7 @@ class NoticiasController extends BaseController
         if (Noticias::check($id)) {
             $noticia = Noticias::findFirst($id);
             $data = $this->request->getJsonRawBody();
-
+            $filter = new Filter;
             $noticia->titulo = $data->titulo;
             $noticia->contenido = $data->contenido;
             $noticia->update_at = date('Y/m/d H:i:s');

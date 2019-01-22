@@ -15,8 +15,8 @@ class AuthController extends \Phalcon\Mvc\Controller
      */
     public function auth(): Response
     {
-        $email = $this->request->getPost('email', 'email', '');
-        $pass = $this->request->getPost('pass');
+        $email = $this->request->getPost('email', 'email');
+        $pass = $this->request->getPost('pass', 'string');
         $user = Users::findFirst("email = '$email'");
         $response = new Response();
         $token = ['message' => 'Error de autenticacion'];

@@ -8,8 +8,8 @@ $response = $client->request('GET', 'https://uinames.com/api/');
 $body = $response->getBody();
 $body = json_decode((string) $body);
 
-$I = new ApiTester($scenario);
+/*$I = new ApiTester($scenario);
 $I->amBearerAuthenticated(generarToken());
 $I->sendPost('/users/', ['name' => $body->name, 'pass' => $body->surname, 'email' => $body->name . '@contoso.com']);
 $I->seeResponseMatchesJsonType(['name' => 'string']);
-$I->seeResponseContainsJson(['name' => $body->name]);
+$I->seeResponseContainsJson(['name' => $body->name]);*/

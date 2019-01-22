@@ -69,6 +69,12 @@ class Noticias extends \Phalcon\Mvc\Model
         return true;
     }
 
+    /**
+     * beforeUpdate function
+     *
+     * Antes de modificar debe verificar que la noticia pertenece a ese usuario
+     * @return void
+     */
     public function beforeUpdate()
     {
         $userId = $this->di->getAuth()->data('sub');

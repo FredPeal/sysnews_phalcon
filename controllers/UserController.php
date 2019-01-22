@@ -4,6 +4,7 @@ namespace Sysnews\Controllers;
 
 use \Sysnews\Models\Users;
 use Phalcon\Http\Response;
+use Phalcon\Filter;
 
 class UserController extends BaseController
 {
@@ -42,8 +43,8 @@ class UserController extends BaseController
     public function store(): Response
     {
         $user = new Users();
-        $user->name = $this->request->getPost('name');
-        $user->email = $this->request->getPost('email');
+        $user->name = $this->request->getPost('name', 'string');
+        $user->email = $this->request->getPost('email', 'email');
         $user->pass = password_hash($this->request->getPost('pass'), PASSWORD_DEFAULT);
         $user->created_at = date('Y/m/d H:i:s');
         $user->update_at = date('Y/m/d H:i:s');
@@ -63,13 +64,13 @@ class UserController extends BaseController
     public function update(int $id): Response
     {
         $message = 'El usuario no existe';
-
+        $filter = new Filter();
         if (Users::check($id)) {
             $data = $this->request->getJsonRawBody();
 
             $user = Users::findFirst(["id = $id"]);
-            $user->name = $data->name;
-            $user->email = $data->email;
+            $user->name = $filter->sanitize($data->name, 'string');
+            $user->email = $filter->sanitize($data->email, 'email');
             $user->update_at = date('Y/m/d H:i:s');
 
             if (!$user->save()) {
