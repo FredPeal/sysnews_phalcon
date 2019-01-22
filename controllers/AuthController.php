@@ -23,6 +23,8 @@ class AuthController extends \Phalcon\Mvc\Controller
 
         if (password_verify($pass, $user->pass)) {
             $token = $this->token($user->toArray());
+        } else {
+            throw new Exception('Pass incorrecto');
         }
 
         $response->setJsonContent($token);
