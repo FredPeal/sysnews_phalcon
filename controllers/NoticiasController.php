@@ -65,8 +65,8 @@ class NoticiasController extends BaseController
         //$message = 'La noticia no existe';
         if (Noticias::check($id)) {
             $noticia = Noticias::findFirst($id);
-            $noticia->vista++;
-            $noticia->save();
+            //$noticia->vista++;
+            //$noticia->save();
 
             $message = $noticia->toArray();
         } else {

@@ -4,3 +4,19 @@
 [Tue, 22 Jan 19 16:55:30 +0000][EMERGENCY] La noticia no existe
 [Tue, 22 Jan 19 16:56:31 +0000][EMERGENCY] La noticia no existe
 [Tue, 22 Jan 19 16:59:22 +0000][EMERGENCY] Esta noticia no le pertence
+[Tue, 22 Jan 19 17:28:12 +0000][EMERGENCY] Class 'Sysnews\Controllers\Exception' not found
+[Tue, 22 Jan 19 17:28:17 +0000][EMERGENCY] Class 'Sysnews\Controllers\Exception' not found
+[Tue, 22 Jan 19 17:29:19 +0000][EMERGENCY] Class 'Sysnews\Controllers\Exception' not found
+[Tue, 22 Jan 19 17:29:31 +0000][EMERGENCY] Class 'Sysnews\Controllers\Exception' not found
+[Tue, 22 Jan 19 17:48:34 +0000][EMERGENCY] Esta noticia no le pertence
+[Tue, 22 Jan 19 17:48:34 +0000][EMERGENCY] Esta noticia no le pertence
+[Tue, 22 Jan 19 17:48:59 +0000][EMERGENCY] Esta noticia no le pertence
+[Tue, 22 Jan 19 17:48:59 +0000][EMERGENCY] Esta noticia no le pertence
+[Tue, 22 Jan 19 17:49:21 +0000][EMERGENCY] La noticia no existe
+[Tue, 22 Jan 19 17:51:03 +0000][EMERGENCY] Esta noticia no le pertence
+[Tue, 22 Jan 19 17:51:32 +0000][EMERGENCY] Esta noticia no le pertence
+[Tue, 22 Jan 19 17:52:05 +0000][EMERGENCY] Esta noticia no le pertence
+[Tue, 22 Jan 19 17:52:06 +0000][EMERGENCY] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Carolina-Carolina@contoso.com' for key 'name'
+[Tue, 22 Jan 19 17:52:48 +0000][EMERGENCY] Esta noticia no le pertence
+[Tue, 22 Jan 19 17:54:20 +0000][EMERGENCY] Esta noticia no le pertence
+[Tue, 22 Jan 19 17:55:03 +0000][EMERGENCY] Esta noticia no le pertence 47 43

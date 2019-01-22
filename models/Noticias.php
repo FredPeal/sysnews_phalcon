@@ -72,9 +72,8 @@ class Noticias extends \Phalcon\Mvc\Model
     public function beforeUpdate()
     {
         $userId = $this->di->getAuth()->data('sub');
-        $this->id;
-        if ($userId != $this->id) {
-            throw new Exception('Esta noticia no le pertence');
+        if ($userId != $this->iduser) {
+            throw new Exception('Esta noticia no le pertence ');
         }
     }
 }
