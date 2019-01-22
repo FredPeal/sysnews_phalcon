@@ -1,13 +1,6 @@
 <?php
 
-class Test
-{
-    public $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDc5MTE1NTcsImlzcyI6InBoYWxjb24tand0LWF1dGgiLCJzdWIiOiIxIiwiZW1haWwiOiJmcmVkZXJpY2twZWFsQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiZnJlZGVyaWNrcGVhbCIsImlhdCI6MTU0NzgyNTE1N30.zWZ64jWE2K0oVVz9wEI9FEsH00h4ssK4rwWboTyTOGM';
-    public $i = null;
 
-    public function __construct()
-    {
-        $I = new ApiTester($scenario);
-        $I->amBearerAuthenticated($token);
-    }
-}
+    $token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NDgyNTExODUsImlzcyI6InN5c25ld3MubG9jYWwiLCJzdWIiOiIxIiwiZW1haWwiOiJmcmVkZXJpY2twZWFsQGdtYWlsLmNvbSIsInVzZXJuYW1lIjoiZnJlZGVyaWNrcGVhbCIsImlhdCI6MTU0ODE2NDc4NX0.Kdxo4nQD2dvy3N9AcV-rP0jAmYF_zvoxY8Bb4-xBEKE';
+    $I = new ApiTester($scenario);
+    $I->amBearerAuthenticated($token);

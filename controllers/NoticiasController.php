@@ -13,15 +13,32 @@ class NoticiasController extends BaseController
      */
     public function index(): Response
     {
-        $datos = $this->request->getQuery();
-        unset($datos['_url'], $datos['page'], $datos['count']);
+        $datos = ['true' => 1];
+
+        $query = '1 = :true:';
+
+        if ($this->request->has('titulo') && !empty($this->request->getQuery('titulo'))) {
+            $datos['titulo'] = $this->request->getQuery('titulo');
+            $query = 'AND titulo = :titulo:';
+        }
+
+        if ($this->request->has('contenido') && !empty($this->request->getQuery('contenido'))) {
+            $datos['contenido'] = $this->request->getQuery('contenido') . '%';
+            $query = $query . 'AND contenido Like  :contenido:';
+        }
+
+        if ($this->request->has('fecha') && !empty($this->request->getQuery('fecha'))) {
+            $datos['created_at'] = $this->request->getQuery('fecha');
+            $query = $query . ' AND created_at = :created_at:';
+        }
+
+        // var_dump($query);
+        // var_dump($datos);
 
         $noticias = Noticias::find([
-            'conditions' => 'titulo = :titulo:',
-            'bind' => [
-                'titulo' => $datos['titulo'],
-            ],
-        ]);
+                    'conditions' => $query,
+                    'bind' => $datos,
+                ]);
 
         $result = [];
 
@@ -94,8 +111,7 @@ class NoticiasController extends BaseController
     public function delete($id): Response
     {
         $noticia = Noticias::findFirst($id);
-        $noticia->delete();
 
-        $this->response(['message' => 'Eliminado correctamente']);
+        return $this->response(['message' => 'Eliminado correctamente']);
     }
 }

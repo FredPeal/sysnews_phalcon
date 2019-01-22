@@ -103,3 +103,17 @@
 [Fri, 18 Jan 19 21:26:31 +0000][ERROR] Unknown model or alias 'users' (11), when preparing: SELECT titulo,contenido,users.name FROM [Sysnews\Models\Noticias] WHERE titulo = :titulo:
 [Fri, 18 Jan 19 21:26:34 +0000][ERROR] Column 'name' doesn't belong to any of the selected models (1), when preparing: SELECT titulo,contenido,name FROM [Sysnews\Models\Noticias] WHERE titulo = :titulo:
 [Fri, 18 Jan 19 21:29:44 +0000][ERROR] Column 'name' doesn't belong to any of the selected models (1), when preparing: SELECT titulo,contenido,name FROM [Sysnews\Models\Noticias] WHERE titulo = :titulo:
+[Tue, 22 Jan 19 14:11:32 +0000][ERROR] Call to undefined method Phalcon\Http\Request::getGet()
+[Tue, 22 Jan 19 14:12:55 +0000][ERROR] Return value of Sysnews\Controllers\NoticiasController::index() must be an instance of Phalcon\Http\Response, none returned
+[Tue, 22 Jan 19 14:13:08 +0000][ERROR] Return value of Sysnews\Controllers\NoticiasController::index() must be an instance of Phalcon\Http\Response, none returned
+[Tue, 22 Jan 19 14:18:01 +0000][ERROR] Return value of Sysnews\Controllers\NoticiasController::index() must be an instance of Phalcon\Http\Response, none returned
+[Tue, 22 Jan 19 14:19:45 +0000][ERROR] Return value of Sysnews\Controllers\NoticiasController::index() must be an instance of Phalcon\Http\Response, none returned
+[Tue, 22 Jan 19 14:20:52 +0000][ERROR] Return value of Sysnews\Controllers\NoticiasController::index() must be an instance of Phalcon\Http\Response, none returned
+[Tue, 22 Jan 19 14:21:36 +0000][ERROR] Syntax error, unexpected token %%, near to ':contenido:%', when parsing: SELECT [Sysnews\Models\Noticias].* FROM [Sysnews\Models\Noticias] WHERE titulo = :titulo: AND contenido Like %:contenido:% (122)
+[Tue, 22 Jan 19 14:23:32 +0000][ERROR] Syntax error, unexpected token %%, near to ' :contenido: %', when parsing: SELECT [Sysnews\Models\Noticias].* FROM [Sysnews\Models\Noticias] WHERE titulo = :titulo: AND contenido Like % :contenido: % (124)
+[Tue, 22 Jan 19 14:23:57 +0000][ERROR] Syntax error, unexpected EOF
+[Tue, 22 Jan 19 14:29:52 +0000][ERROR] Column 'name' doesn't belong to any of the selected models (1), when preparing: SELECT [Sysnews\Models\Noticias].* FROM [Sysnews\Models\Noticias] WHERE name = frederickpeal
+[Tue, 22 Jan 19 14:30:01 +0000][ERROR] Unknown model or alias 'users' (11), when preparing: SELECT [Sysnews\Models\Noticias].* FROM [Sysnews\Models\Noticias] WHERE users.name = frederickpeal
+[Tue, 22 Jan 19 14:31:01 +0000][ERROR] Unknown model or alias 'Users' (11), when preparing: SELECT [Sysnews\Models\Noticias].* FROM [Sysnews\Models\Noticias] WHERE Users.name = frederickpeal
+[Tue, 22 Jan 19 14:37:31 +0000][ERROR] Return value of Sysnews\Controllers\NoticiasController::delete() must be an instance of Phalcon\Http\Response, none returned
+[Tue, 22 Jan 19 14:38:53 +0000][ERROR] Call to a member function delete() on boolean
