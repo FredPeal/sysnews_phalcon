@@ -136,3 +136,4 @@
 [Tue, 22 Jan 19 16:05:09 +0000][ERROR] Too few arguments to function Sysnews\Models\Noticias::beforeUpdate(), 0 passed and at least 1 expected
 [Tue, 22 Jan 19 16:05:10 +0000][ERROR] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'Panagachie-Panagachie@contoso.com' for key 'name'
 [Tue, 22 Jan 19 16:05:16 +0000][ERROR] Too few arguments to function Sysnews\Models\Noticias::beforeUpdate(), 0 passed and at least 1 expected
+[Tue, 22 Jan 19 16:12:11 +0000][ERROR] Call to a member function data() on null

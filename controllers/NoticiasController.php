@@ -135,7 +135,7 @@ class NoticiasController extends BaseController
     {
         $message = 'No existe la noticia';
         if (Noticias::check($id)) {
-            if (Noticias::beforeUpd($id, $this->user->data('sub'))) {
+            if (Noticias::beforeUpd($id, $this->auth->data('sub'))) {
                 $noticia = Noticias::findFirst($id);
                 $noticia->delete();
                 $message = ['message' => 'Eliminado correctamente'];
