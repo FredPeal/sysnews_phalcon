@@ -20,12 +20,12 @@ class NoticiasController extends BaseController
 
         $query = '1 = :true: ';
 
-        if ($this->request->has('titulo') && !empty($this->request->getQuery('titulo'))) {
+        if ($this->request->has('titulo') && !empty($this->request->getQuery('titulo', 'string'))) {
             $datos['titulo'] = $this->request->getQuery('titulo', 'string');
             $query = $query . 'AND titulo = :titulo:';
         }
 
-        if ($this->request->has('contenido') && !empty($this->request->getQuery('contenido'))) {
+        if ($this->request->has('contenido') && !empty($this->request->getQuery('contenido', 'string'))) {
             $datos['contenido'] = $this->request->getQuery('contenido') . '%';
             $query = $query . 'AND contenido Like  :contenido:';
         }
@@ -65,7 +65,9 @@ class NoticiasController extends BaseController
     {
         //$message = 'La noticia no existe';
         if (Noticias::check($id)) {
-            $noticia = Noticias::findFirst($id);
+            $filter = new Filter;
+
+            $noticia = Noticias::findFirst($filter->sanitize($id, 'int'));
             //$noticia->vista++;
             //$noticia->save();
 
@@ -112,11 +114,11 @@ class NoticiasController extends BaseController
     {
         $message = 'La noticia no existe';
         if (Noticias::check($id)) {
-            $noticia = Noticias::findFirst($id);
-            $data = $this->request->getJsonRawBody();
             $filter = new Filter;
-            $noticia->titulo = $data->titulo;
-            $noticia->contenido = $data->contenido;
+            $noticia = Noticias::findFirst($filter->sanitize($id, 'int'));
+            $data = $this->request->getJsonRawBody();
+            $noticia->titulo = $filter->sanitize($data->titulo, 'string');
+            $noticia->contenido = $filter->sanitize($data->contenido, 'string');
             $noticia->update_at = date('Y/m/d H:i:s');
 
             if (!$noticia->save()) {

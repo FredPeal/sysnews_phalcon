@@ -33,3 +33,11 @@
 [Tue, 22 Jan 19 19:52:09 +0000][EMERGENCY] email, name Deben ser unicos
 [Tue, 22 Jan 19 19:52:15 +0000][EMERGENCY] email, name deben ser unicos
 [Tue, 22 Jan 19 19:54:04 +0000][EMERGENCY] The e-mail is not valid
+[Tue, 22 Jan 19 20:04:44 +0000][EMERGENCY] Sanitize filter 'integer' is not supported
+[Tue, 22 Jan 19 20:04:55 +0000][EMERGENCY] Sanitize filter 'date' is not supported
+[Tue, 22 Jan 19 20:06:04 +0000][EMERGENCY] Wrong number of parameters
+[Tue, 22 Jan 19 20:06:15 +0000][EMERGENCY] Wrong number of parameters
+[Tue, 22 Jan 19 20:06:31 +0000][EMERGENCY] Argument 1 passed to Sysnews\Controllers\NoticiasController::show() must be of the type integer, string given
+[Tue, 22 Jan 19 20:13:16 +0000][EMERGENCY] Argument 1 passed to Sysnews\Controllers\NoticiasController::show() must be of the type integer, string given
+[Tue, 22 Jan 19 20:13:40 +0000][EMERGENCY] La noticia no existe
+[Tue, 22 Jan 19 20:13:43 +0000][EMERGENCY] La noticia no existe

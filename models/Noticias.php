@@ -3,6 +3,7 @@
 namespace Sysnews\Models;
 
 use Exception;
+use Phalcon\Validation;
 
 class Noticias extends \Phalcon\Mvc\Model
 {
@@ -81,5 +82,17 @@ class Noticias extends \Phalcon\Mvc\Model
         if ($userId != $this->iduser) {
             throw new Exception('Esta noticia no le pertence ');
         }
+    }
+
+    public function validation()
+    {
+        $validator = new Validation;
+        $validator->add('id', new DigitValidator(
+            [
+                'message' => ':field tiene que ser un numero',
+            ]
+            ));
+
+        return $this->validate($validator);
     }
 }
