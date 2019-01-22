@@ -4,12 +4,13 @@ namespace Sysnews\Controllers;
 
 use Sysnews\Models\Noticias;
 use Phalcon\Http\Response;
+use Exception;
 
 class NoticiasController extends BaseController
 {
     /**
      * Busca en la base de datos nas noticias que coincidan con el titulo, deben llevar mas filtros , pero aun no funcionan
-     *
+     * @return  Response
      */
     public function index(): Response
     {
@@ -54,18 +55,26 @@ class NoticiasController extends BaseController
 
     /**
      * Funcion para buscar noticias por el id
+     * @param  int $id
+     * @return  Response
      */
-    public function show(Int $id): Response
+    public function show(int $id): Response
     {
-        $noticia = Noticias::findFirst($id);
-        $noticia->vista++;
-        $noticia->save();
+        $message = 'La noticia no existe';
+        if (Noticias::check($id)) {
+            $noticia = Noticias::findFirst($id);
+            $noticia->vista++;
+            $noticia->save();
 
-        return $this->response($noticia);
+            $message = $noticia->toArray();
+        }
+
+        return $this->response($message);
     }
 
     /**
      * Funcion para almacenar noticias, en caso de que no funcione captura la execepcion y la devuelve
+     * @return  Response
      */
     public function store(): Response
     {
@@ -79,7 +88,7 @@ class NoticiasController extends BaseController
         $noticia->vista = 0;
 
         if (!$noticia->save()) {
-            throw new \Exception(current($noticia->getMessages()));
+            throw new Exception(current($noticia->getMessages()));
         }
 
         return $this->response($noticia->toArray());
@@ -88,30 +97,48 @@ class NoticiasController extends BaseController
     /**
      * Funcion para actualizar noticas por el ID, recibe un id copmo parametro
      * OJO , deben enviar los datos en Json mediante PUT o no funcionara
+     * @param int $id
+     * @return Response
      */
-    public function update(Int $id): Response
+    public function update(int $id): Response
     {
-        $noticia = Noticias::findFirst($id);
-        $data = $this->request->getJsonRawBody();
+        $message = 'La noticia no existe';
+        if (Noticias::check($id)) {
+            $noticia = Noticias::findFirst($id);
+            $data = $this->request->getJsonRawBody();
 
-        $noticia->titulo = $data->titulo;
-        $noticia->contenido = $data->contenido;
-        $noticia->update_at = date('Y/m/d H:i:s');
+            $noticia->titulo = $data->titulo;
+            $noticia->contenido = $data->contenido;
+            $noticia->update_at = date('Y/m/d H:i:s');
 
-        if (!$noticia->save()) {
-            throw new \Exception(current($noticia->getMessages()));
+            if (!$noticia->save()) {
+                throw new \Exception(current($noticia->getMessages()));
+            }
+
+            $message = $noticia->toArray();
         }
 
-        return $this->response($noticia->toArray());
+        return $this->response($message);
     }
 
     /**
      * Funcion para borrar una noticia
+     * @param int $id
+     * @return  Response
      */
-    public function delete($id): Response
+    public function delete(int $id): Response
     {
-        $noticia = Noticias::findFirst($id);
+        $message = 'No existe la noticia';
+        if (Noticias::check($id)) {
+            if (Noticias::beforeUpd($id, $this->user->data('sub'))) {
+                $noticia = Noticias::findFirst($id);
+                $noticia->delete();
+                $message = ['message' => 'Eliminado correctamente'];
+            } else {
+                $message = ['message' => 'Esta noticia no le pertenece'];
+            }
+        }
 
-        return $this->response(['message' => 'Eliminado correctamente']);
+        return $this->response($message);
     }
 }

@@ -9,6 +9,7 @@ class UserController extends BaseController
 {
     /**
      * La funcion index en usuarios busca los usuarios pero no la contraseña
+     * @return  Response
      */
     public function index(): Response
     {
@@ -19,15 +20,21 @@ class UserController extends BaseController
 
     /**
      * La funcion show recibe el id y filtra los resultados, pero no devuelve la contraseña
+     * @param  int $id
     */
-    public function show(Int $id): Response
+    public function show(int $id): Response
     {
-        $users = Users::find(['conditions' => "id = $id", 'columns' => 'id,name,email']);
-        return $this->response($users->toArray());
+        $message = 'El usuario no existe';
+        if (Users::check($id)) {
+            $users = Users::find(['conditions' => "id = $id", 'columns' => 'id,name,email']);
+            $message = $users->toArray();
+        }
+        return $this->response($message);
     }
 
     /**
      * Funcion para crear nuevos usuarios
+     *  @return  Response
      */
     public function store(): Response
     {
@@ -47,31 +54,46 @@ class UserController extends BaseController
 
     /**
      * Funcion para modificar usuarios
+     * @return Response
      */
-    public function update(Int $id): Response
+    public function update(int $id): Response
     {
-        $data = $this->request->getJsonRawBody();
+        $message = 'El usuario no existe';
 
-        $user = Users::findFirst(["id = $id"]);
-        $user->name = $data->name;
-        $user->email = $data->email;
-        $user->update_at = date('Y/m/d H:i:s');
+        if (Users::check($id)) {
+            $data = $this->request->getJsonRawBody();
 
-        if (!$user->save()) {
-            throw new Exception(current($user->getMessages()));
+            $user = Users::findFirst(["id = $id"]);
+            $user->name = $data->name;
+            $user->email = $data->email;
+            $user->update_at = date('Y/m/d H:i:s');
+
+            if (!$user->save()) {
+                throw new Exception(current($user->getMessages()));
+            }
+
+            $message = $user->toArray();
         }
 
-        return $this->response($user->toArray());
+        return $this->response($message);
     }
 
     /**
      * Funcion para eliminar usuarios, recibe el id como parametro
+     * @param int $id
+     * @return Response
+     *
      */
-    public function delete(Int $id)
+    public function delete(int $id) : Response
     {
-        $user = Users::findFirst(["id = $id"]);
-        $user->delete();
+        $message = 'El usuario no existe';
 
-        return $this->response(['message' => 'Eliminado correctamente']);
+        if (Users::check($id)) {
+            $user = Users::findFirst(["id = $id"]);
+            $user->delete();
+            $message = ['message' => 'Eliminado correctamente'];
+        }
+
+        return $this->response($message);
     }
 }

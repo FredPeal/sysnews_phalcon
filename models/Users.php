@@ -13,6 +13,11 @@ class Users extends Model
     public $created_at ;
     public $update_at ;
 
+    /**
+     * initalize function
+     * Pasa la connecion y las relaciones, tambien sera necesaria para algunas opciones dependiendo la necesidad, (Lease la documentacion )
+     * @return void
+     */
     public function initialize()
     {
         // $this->setSource('users');
@@ -20,8 +25,20 @@ class Users extends Model
         $this->hasMany('id', 'Sysnews\Models\Noticias', 'iduser', ['alias' => 'noticias', 'reusable' => true]);
     }
 
-    public function getSource()
+    /**
+     * Check Function
+     * Debe chequear si el usuario existe
+     * @param int $id
+     * @return bool
+     */
+    public static function check(int $id): bool
     {
-        return 'users';
+        $user = self::findFirst($id);
+
+        if ($user) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

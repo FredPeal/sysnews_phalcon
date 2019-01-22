@@ -13,6 +13,11 @@ class Noticias extends \Phalcon\Mvc\Model
     public $soft_delete;
     public $vista;
 
+    /**
+     * initalize function
+     * Pasa la connecion y las relaciones, tambien sera necesaria para algunas opciones dependiendo la necesidad, (Lease la documentacion )
+     * @return void
+     */
     public function initialize()
     {
         // $this->setSource('users');
@@ -20,8 +25,42 @@ class Noticias extends \Phalcon\Mvc\Model
         $this->belongsTo('iduser', 'Sysnews\Models\Users', 'id', ['alias' => 'users']);
     }
 
-    public function getSource()
+    /**
+     * Check Function
+     * Debe chequear si la noticia existe
+     * @param int $id
+     * @return bool
+     */
+    public static function check(int $id): bool
     {
-        return 'noticias';
+        $noticia = self::findFirst($id);
+
+        if ($noticia) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Funcion beforeUpd
+     * Debe de verificar si la notica pertenece a ese usuario
+     * @param int $id, int $iduser
+     * @return  bool
+     */
+    public static function beforeUpd(int $id, int $iduser) : bool
+    {
+        $noticia = Noticias::find([
+            'conditions' => 'id = :id: AND iduser = :iduser:',
+            'bind' => [
+                'id' => $id,
+                'iduser' => $iduser
+            ]
+         ]);
+
+        if (empty($noticia->toArray()) || count($noticia->toArray()) == 0) {
+            return false;
+        }
+
+        return true;
     }
 }
