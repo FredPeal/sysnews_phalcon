@@ -36,7 +36,7 @@ class BaseController extends \Phalcon\Mvc\Controller
                 'page' => $page,
             ]
         );
-        var_dump($paginator->getPaginate());
+        //var_dump($paginator->getPaginate());
         return $paginator->getPaginate();
     }
 }

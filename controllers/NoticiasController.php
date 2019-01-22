@@ -62,13 +62,16 @@ class NoticiasController extends BaseController
      */
     public function show(int $id): Response
     {
-        $message = 'La noticia no existe';
+        //$message = 'La noticia no existe';
         if (Noticias::check($id)) {
             $noticia = Noticias::findFirst($id);
             $noticia->vista++;
             $noticia->save();
 
             $message = $noticia->toArray();
+        } else {
+            //die('3');
+            throw new Exception('no existe');
         }
 
         return $this->response($message);
@@ -135,13 +138,10 @@ class NoticiasController extends BaseController
     {
         $message = 'No existe la noticia';
         if (Noticias::check($id)) {
-            if (Noticias::beforeUpd($id, $this->auth->data('sub'))) {
-                $noticia = Noticias::findFirst($id);
-                $noticia->delete();
-                $message = ['message' => 'Eliminado correctamente'];
-            } else {
-                $message = ['message' => 'Esta noticia no le pertenece'];
-            }
+            $noticia = Noticias::findFirst($id);
+            $noticia->soft_delete = 1 ;
+            $noticia->save();
+            $message = ['message' => 'Eliminado correctamente'];
         }
 
         return $this->response($message);

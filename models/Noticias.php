@@ -2,6 +2,8 @@
 
 namespace Sysnews\Models;
 
+use Exception;
+
 class Noticias extends \Phalcon\Mvc\Model
 {
     public $id;
@@ -40,7 +42,7 @@ class Noticias extends \Phalcon\Mvc\Model
         if ($noticia) {
             return true;
         }
-        return false;
+        throw new Exception('La noticia no existe');
     }
 
     /**
@@ -65,5 +67,14 @@ class Noticias extends \Phalcon\Mvc\Model
         }
 
         return true;
+    }
+
+    public function beforeUpdate()
+    {
+        $userId = $this->di->getAuth()->data('sub');
+        $this->id;
+        if ($userId != $this->id) {
+            throw new Exception('Esta noticia no le pertence');
+        }
     }
 }

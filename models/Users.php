@@ -3,6 +3,7 @@
 namespace Sysnews\Models;
 
 use Phalcon\Mvc\Model;
+use Exception;
 
 class Users extends Model
 {
@@ -39,8 +40,8 @@ class Users extends Model
 
         if ($user) {
             return true;
-        } else {
-            return false;
         }
+
+        throw new Exception('El usuario no existe');
     }
 }

@@ -38,50 +38,7 @@ try {
         ],
     ]);
 
-    if ($config->app->production) {
-        // Log the exception
-        $di->getLog()->error($e->getMessage(), $e->getTrace());
-    }
-
+    $logger = $di->get('log');
+    $logger->log('Error', $e->getMessage());
     $response->send();
 }
-
-// $app->get(
-//     '/',
-//     function () {
-//         echo "Hola";
-//     }
-// );
-// $app->handle();
-// echo $application->handle($uri)->getContent();
-
-/*
-use Phalcon\Mvc\Micro;
-use Phalcon\Mvc\Router;
-use Phalcon\Mvc\Micro\Collection as MicroCollection;
-use Phalcon\Di;
-
-
-include_once __DIR__ . '/../config/loader.php';
-include_once __DIR__ . '/../config/database.php';
-
-$router = new Router();
-
-$di = new Di;
-$di->set('db',$config->database);
-$di->set('router',$router);
-
-$app = new Micro($di);
-
-
-//Rutas de usuarios
-$users = new MicroCollection();
-$users->setHandler(new \Controllers\UserController());
-$users->setPrefix('/users');
-$users->get('/','index');
-$users->post('/','store');
-
-
-$app->mount($users);
-$app->handle();
- */
