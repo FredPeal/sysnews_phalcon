@@ -9,6 +9,7 @@ class UserController extends BaseController
 {
     /**
      * La funcion index en usuarios busca los usuarios pero no la contraseña
+     *
      * @return  Response
      */
     public function index(): Response
@@ -20,6 +21,7 @@ class UserController extends BaseController
 
     /**
      * La funcion show recibe el id y filtra los resultados, pero no devuelve la contraseña
+     *
      * @param  int $id
     */
     public function show(int $id): Response
@@ -34,6 +36,7 @@ class UserController extends BaseController
 
     /**
      * Funcion para crear nuevos usuarios
+     *
      *  @return  Response
      */
     public function store(): Response
@@ -54,6 +57,7 @@ class UserController extends BaseController
 
     /**
      * Funcion para modificar usuarios
+     *
      * @return Response
      */
     public function update(int $id): Response
@@ -80,6 +84,7 @@ class UserController extends BaseController
 
     /**
      * Funcion para eliminar usuarios, recibe el id como parametro
+     *
      * @param int $id
      * @return Response
      *

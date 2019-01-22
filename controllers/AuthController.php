@@ -10,6 +10,7 @@ class AuthController extends \Phalcon\Mvc\Controller
     /**
      * Busca un usuario en la base de datos que coincida con ese emai
      * Luego compara la contraseña , si es correcta entonces genera el token con el id, email y nombre , luego retorna el token
+     *
      * @return  Response
      */
     public function auth(): Response
@@ -30,6 +31,7 @@ class AuthController extends \Phalcon\Mvc\Controller
 
     /**
      * La funcion debe de recibir los datos del usuario en array para luego retornar el token
+     *
      * @param string $user
      * @return string
      */

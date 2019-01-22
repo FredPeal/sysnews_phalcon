@@ -10,6 +10,7 @@ class NoticiasController extends BaseController
 {
     /**
      * Busca en la base de datos nas noticias que coincidan con el titulo, deben llevar mas filtros , pero aun no funcionan
+     *
      * @return  Response
      */
     public function index(): Response
@@ -55,6 +56,7 @@ class NoticiasController extends BaseController
 
     /**
      * Funcion para buscar noticias por el id
+     *
      * @param  int $id
      * @return  Response
      */
@@ -74,6 +76,7 @@ class NoticiasController extends BaseController
 
     /**
      * Funcion para almacenar noticias, en caso de que no funcione captura la execepcion y la devuelve
+     *
      * @return  Response
      */
     public function store(): Response
@@ -97,6 +100,7 @@ class NoticiasController extends BaseController
     /**
      * Funcion para actualizar noticas por el ID, recibe un id copmo parametro
      * OJO , deben enviar los datos en Json mediante PUT o no funcionara
+     *
      * @param int $id
      * @return Response
      */
@@ -123,6 +127,7 @@ class NoticiasController extends BaseController
 
     /**
      * Funcion para borrar una noticia
+     *
      * @param int $id
      * @return  Response
      */

@@ -16,6 +16,7 @@ class Noticias extends \Phalcon\Mvc\Model
     /**
      * initalize function
      * Pasa la connecion y las relaciones, tambien sera necesaria para algunas opciones dependiendo la necesidad, (Lease la documentacion )
+     *
      * @return void
      */
     public function initialize()
@@ -28,6 +29,7 @@ class Noticias extends \Phalcon\Mvc\Model
     /**
      * Check Function
      * Debe chequear si la noticia existe
+     *
      * @param int $id
      * @return bool
      */
@@ -44,6 +46,7 @@ class Noticias extends \Phalcon\Mvc\Model
     /**
      * Funcion beforeUpd
      * Debe de verificar si la notica pertenece a ese usuario
+     *
      * @param int $id, int $iduser
      * @return  bool
      */

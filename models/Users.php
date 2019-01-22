@@ -16,6 +16,7 @@ class Users extends Model
     /**
      * initalize function
      * Pasa la connecion y las relaciones, tambien sera necesaria para algunas opciones dependiendo la necesidad, (Lease la documentacion )
+     *
      * @return void
      */
     public function initialize()
@@ -28,6 +29,7 @@ class Users extends Model
     /**
      * Check Function
      * Debe chequear si el usuario existe
+     *
      * @param int $id
      * @return bool
      */

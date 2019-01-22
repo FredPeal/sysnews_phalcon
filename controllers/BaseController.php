@@ -23,8 +23,9 @@ class BaseController extends \Phalcon\Mvc\Controller
     /**
      * Recibo un array y uso el paginador de  Phalcon
      * Por defualt toma la primera pagina con 10 resultados y devuelve el array
+     *
      * @param array $data , int $page , int $limit
-     * return array
+     * @return array
      */
     public function paginate(array $data, int $page = 1, int $limit = 10): array
     {
