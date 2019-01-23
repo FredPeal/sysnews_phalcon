@@ -5,7 +5,7 @@ use Dmkit\Phalcon\Auth\Middleware\Micro as AuthMicro;
 
 $dotenv = Dotenv\Dotenv::create(__DIR__ . '/../');
 $dotenv->load();
-
+//hola
 try {
     $config = require __DIR__ . '/../config/config.php';
 
