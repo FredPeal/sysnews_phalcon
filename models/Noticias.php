@@ -4,6 +4,7 @@ namespace Sysnews\Models;
 
 use Exception;
 use Phalcon\Validation;
+use Phalcon\Validation\Validator\Digit as DigitValidator;
 
 class Noticias extends \Phalcon\Mvc\Model
 {
@@ -84,15 +85,15 @@ class Noticias extends \Phalcon\Mvc\Model
         }
     }
 
-    public function validation()
-    {
-        $validator = new Validation;
-        $validator->add('id', new DigitValidator(
-            [
-                'message' => ':field tiene que ser un numero',
-            ]
-            ));
+    // public function validation()
+    // {
+    //     $validator = new Validation;
+    //     $validator->add('id', new DigitValidator(
+    //         [
+    //             'message' => ':field tiene que ser un numero',
+    //         ]
+    //         ));
 
-        return $this->validate($validator);
-    }
+    //     return $this->validate($validator);
+    // }
 }

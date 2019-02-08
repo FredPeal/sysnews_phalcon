@@ -10,7 +10,6 @@ try {
     $config = require __DIR__ . '/../config/config.php';
 
     require __DIR__ . '/../config/loader.php';
-
     require __DIR__ . '/../config/services.php';
 
     // $uri = $di->getRouter()->getRewriteUri();
@@ -37,6 +36,7 @@ try {
             'trace' => !$config->app->production ? $e->getTraceAsString() : null,
         ],
     ]);
+    die($e->getMessage());
 
     $logger = $di->get('log');
     $logger->log('Error', $e->getMessage());

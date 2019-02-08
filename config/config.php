@@ -27,7 +27,7 @@ $settings = [
                 'regex:/users/:POST,PUT',
                 '/auth/user:POST,PUT',
                 '/auth/application',
-                '/auth/',
+                'regex:/auth/',
                 '/noticias/',
             ]
          ],

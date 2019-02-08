@@ -177,3 +177,7 @@ deploy.config:
     web.tdm:
       # Run migrations after deployment
       - /app/vendor/bin/phinx migrate
+
+# Elastic 
+data.elasticsearch:
+  image: nanobox/elasticsearch:5
