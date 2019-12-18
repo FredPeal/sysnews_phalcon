@@ -28,7 +28,6 @@ use SimpleXMLElement;
  */
 class Xml
 {
-
     /**
      * Initialize SimpleXMLElement or DOMDocument from a given XML string, file path, URL or array.
      *
@@ -273,7 +272,7 @@ class Xml
             'version' => '1.0',
             'encoding' => mb_internal_encoding(),
             'return' => 'simplexml',
-            'pretty' => false
+            'pretty' => false,
         ];
         $options += $defaults;
 
@@ -443,7 +442,7 @@ class Xml
      * @param \SimpleXMLElement $xml SimpleXMLElement object
      * @param array $parentData Parent array with data
      * @param string $ns Namespace of current child
-     * @param array $namespaces List of namespaces in XML
+     * @param string[] $namespaces List of namespaces in XML
      * @return void
      */
     protected static function _toArray($xml, &$parentData, $ns, $namespaces)

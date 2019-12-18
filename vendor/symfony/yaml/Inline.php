@@ -34,12 +34,7 @@ class Inline
     private static $objectForMap = false;
     private static $constantSupport = false;
 
-    /**
-     * @param int         $flags
-     * @param int|null    $parsedLineNumber
-     * @param string|null $parsedFilename
-     */
-    public static function initialize($flags, $parsedLineNumber = null, $parsedFilename = null)
+    public static function initialize(int $flags, int $parsedLineNumber = null, string $parsedFilename = null)
     {
         self::$exceptionOnInvalidType = (bool) (Yaml::PARSE_EXCEPTION_ON_INVALID_TYPE & $flags);
         self::$objectSupport = (bool) (Yaml::PARSE_OBJECT & $flags);
@@ -63,7 +58,7 @@ class Inline
      *
      * @throws ParseException
      */
-    public static function parse(string $value = null, int $flags = 0, array $references = array())
+    public static function parse(string $value = null, int $flags = 0, array $references = [])
     {
         self::initialize($flags);
 
@@ -94,13 +89,13 @@ class Inline
                     $result = self::parseScalar($value, $flags, null, $i, null === $tag, $references);
             }
 
-            if (null !== $tag && '' !== $tag) {
-                return new TaggedValue($tag, $result);
-            }
-
             // some comments are allowed at the end
             if (preg_replace('/\s+#.*$/A', '', substr($value, $i))) {
                 throw new ParseException(sprintf('Unexpected characters near "%s".', substr($value, $i)), self::$parsedLineNumber + 1, $value, self::$parsedFilename);
+            }
+
+            if (null !== $tag && '' !== $tag) {
+                return new TaggedValue($tag, $result);
             }
 
             return $result;
@@ -129,7 +124,7 @@ class Inline
                     throw new DumpException(sprintf('Unable to dump PHP resources in a YAML file ("%s").', get_resource_type($value)));
                 }
 
-                return 'null';
+                return self::dumpNull($flags);
             case $value instanceof \DateTimeInterface:
                 return $value->format('c');
             case \is_object($value):
@@ -142,7 +137,7 @@ class Inline
                 }
 
                 if (Yaml::DUMP_OBJECT_AS_MAP & $flags && ($value instanceof \stdClass || $value instanceof \ArrayObject)) {
-                    $output = array();
+                    $output = [];
 
                     foreach ($value as $key => $val) {
                         $output[] = sprintf('%s: %s', self::dump($key, $flags), self::dump($val, $flags));
@@ -155,11 +150,11 @@ class Inline
                     throw new DumpException('Object support when dumping a YAML file has been disabled.');
                 }
 
-                return 'null';
+                return self::dumpNull($flags);
             case \is_array($value):
                 return self::dumpArray($value, $flags);
             case null === $value:
-                return 'null';
+                return self::dumpNull($flags);
             case true === $value:
                 return 'true';
             case false === $value:
@@ -239,7 +234,7 @@ class Inline
     {
         // array
         if (($value || Yaml::DUMP_EMPTY_ARRAY_AS_SEQUENCE & $flags) && !self::isHash($value)) {
-            $output = array();
+            $output = [];
             foreach ($value as $val) {
                 $output[] = self::dump($val, $flags);
             }
@@ -248,12 +243,21 @@ class Inline
         }
 
         // hash
-        $output = array();
+        $output = [];
         foreach ($value as $key => $val) {
             $output[] = sprintf('%s: %s', self::dump($key, $flags), self::dump($val, $flags));
         }
 
         return sprintf('{ %s }', implode(', ', $output));
+    }
+
+    private static function dumpNull(int $flags): string
+    {
+        if (Yaml::DUMP_NULL_AS_TILDE & $flags) {
+            return '~';
+        }
+
+        return 'null';
     }
 
     /**
@@ -263,14 +267,14 @@ class Inline
      *
      * @throws ParseException When malformed inline YAML string is parsed
      */
-    public static function parseScalar(string $scalar, int $flags = 0, array $delimiters = null, int &$i = 0, bool $evaluate = true, array $references = array())
+    public static function parseScalar(string $scalar, int $flags = 0, array $delimiters = null, int &$i = 0, bool $evaluate = true, array $references = [])
     {
-        if (\in_array($scalar[$i], array('"', "'"))) {
+        if (\in_array($scalar[$i], ['"', "'"])) {
             // quoted scalar
             $output = self::parseQuotedScalar($scalar, $i);
 
             if (null !== $delimiters) {
-                $tmp = ltrim(substr($scalar, $i), ' ');
+                $tmp = ltrim(substr($scalar, $i), " \n");
                 if ('' === $tmp) {
                     throw new ParseException(sprintf('Unexpected end of line, expected one of "%s".', implode('', $delimiters)), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
                 }
@@ -339,9 +343,9 @@ class Inline
      *
      * @throws ParseException When malformed inline YAML string is parsed
      */
-    private static function parseSequence(string $sequence, int $flags, int &$i = 0, array $references = array()): array
+    private static function parseSequence(string $sequence, int $flags, int &$i = 0, array $references = []): array
     {
-        $output = array();
+        $output = [];
         $len = \strlen($sequence);
         ++$i;
 
@@ -367,8 +371,8 @@ class Inline
                     $value = self::parseMapping($sequence, $flags, $i, $references);
                     break;
                 default:
-                    $isQuoted = \in_array($sequence[$i], array('"', "'"));
-                    $value = self::parseScalar($sequence, $flags, array(',', ']'), $i, null === $tag, $references);
+                    $isQuoted = \in_array($sequence[$i], ['"', "'"]);
+                    $value = self::parseScalar($sequence, $flags, [',', ']'], $i, null === $tag, $references);
 
                     // the value can be an array if a reference has been resolved to an array var
                     if (\is_string($value) && !$isQuoted && false !== strpos($value, ': ')) {
@@ -403,9 +407,9 @@ class Inline
      *
      * @throws ParseException When malformed inline YAML string is parsed
      */
-    private static function parseMapping(string $mapping, int $flags, int &$i = 0, array $references = array())
+    private static function parseMapping(string $mapping, int $flags, int &$i = 0, array $references = [])
     {
-        $output = array();
+        $output = [];
         $len = \strlen($mapping);
         ++$i;
         $allowOverwrite = false;
@@ -415,6 +419,7 @@ class Inline
             switch ($mapping[$i]) {
                 case ' ':
                 case ',':
+                case "\n":
                     ++$i;
                     continue 2;
                 case '}':
@@ -427,8 +432,8 @@ class Inline
 
             // key
             $offsetBeforeKeyParsing = $i;
-            $isKeyQuoted = \in_array($mapping[$i], array('"', "'"), true);
-            $key = self::parseScalar($mapping, $flags, array(':', ' '), $i, false, array());
+            $isKeyQuoted = \in_array($mapping[$i], ['"', "'"], true);
+            $key = self::parseScalar($mapping, $flags, [':', ' '], $i, false, []);
 
             if ($offsetBeforeKeyParsing === $i) {
                 throw new ParseException('Missing mapping key.', self::$parsedLineNumber + 1, $mapping);
@@ -446,7 +451,7 @@ class Inline
                 }
             }
 
-            if (!$isKeyQuoted && (!isset($mapping[$i + 1]) || !\in_array($mapping[$i + 1], array(' ', ',', '[', ']', '{', '}'), true))) {
+            if (!$isKeyQuoted && (!isset($mapping[$i + 1]) || !\in_array($mapping[$i + 1], [' ', ',', '[', ']', '{', '}', "\n"], true))) {
                 throw new ParseException('Colons must be followed by a space or an indication character (i.e. " ", ",", "[", "]", "{", "}").', self::$parsedLineNumber + 1, $mapping);
             }
 
@@ -455,7 +460,7 @@ class Inline
             }
 
             while ($i < $len) {
-                if (':' === $mapping[$i] || ' ' === $mapping[$i]) {
+                if (':' === $mapping[$i] || ' ' === $mapping[$i] || "\n" === $mapping[$i]) {
                     ++$i;
 
                     continue;
@@ -504,7 +509,7 @@ class Inline
                         }
                         break;
                     default:
-                        $value = self::parseScalar($mapping, $flags, array(',', '}'), $i, null === $tag, $references);
+                        $value = self::parseScalar($mapping, $flags, [',', '}', "\n"], $i, null === $tag, $references);
                         // Spec: Keys MUST be unique; first one wins.
                         // Parser cannot abort this mapping earlier, since lines
                         // are processed sequentially.
@@ -538,7 +543,7 @@ class Inline
      *
      * @throws ParseException when object parsing support was disabled and the parser detected a PHP object or when a reference could not be resolved
      */
-    private static function evaluateScalar(string $scalar, int $flags, array $references = array())
+    private static function evaluateScalar(string $scalar, int $flags, array $references = [])
     {
         $scalar = trim($scalar);
         $scalarLower = strtolower($scalar);
@@ -555,7 +560,7 @@ class Inline
                 throw new ParseException('A reference must contain at least one character.', self::$parsedLineNumber + 1, $value, self::$parsedFilename);
             }
 
-            if (!array_key_exists($value, $references)) {
+            if (!\array_key_exists($value, $references)) {
                 throw new ParseException(sprintf('Reference "%s" does not exist.', $value), self::$parsedLineNumber + 1, $value, self::$parsedFilename);
             }
 
@@ -566,7 +571,7 @@ class Inline
             case 'null' === $scalarLower:
             case '' === $scalar:
             case '~' === $scalar:
-                return;
+                return null;
             case 'true' === $scalarLower:
                 return true;
             case 'false' === $scalarLower:
@@ -586,7 +591,7 @@ class Inline
                             throw new ParseException('Object support when parsing a YAML file has been disabled.', self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
                         }
 
-                        return;
+                        return null;
                     case 0 === strpos($scalar, '!php/const'):
                         if (self::$constantSupport) {
                             $i = 0;
@@ -600,7 +605,7 @@ class Inline
                             throw new ParseException(sprintf('The string "%s" could not be parsed as a constant. Have you forgotten to pass the "Yaml::PARSE_CONSTANT" flag to the parser?', $scalar), self::$parsedLineNumber + 1, $scalar, self::$parsedFilename);
                         }
 
-                        return;
+                        return null;
                     case 0 === strpos($scalar, '!!float '):
                         return (float) substr($scalar, 8);
                     case 0 === strpos($scalar, '!!binary '):
@@ -670,7 +675,7 @@ class Inline
         $nextOffset += strspn($value, ' ', $nextOffset);
 
         // Is followed by a scalar and is a built-in tag
-        if ($tag && (!isset($value[$nextOffset]) || !\in_array($value[$nextOffset], array('[', '{'), true)) && ('!' === $tag[0] || 'str' === $tag || 'php/const' === $tag || 'php/object' === $tag)) {
+        if ('' !== $tag && (!isset($value[$nextOffset]) || !\in_array($value[$nextOffset], ['[', '{'], true)) && ('!' === $tag[0] || 'str' === $tag || 'php/const' === $tag || 'php/object' === $tag)) {
             // Manage in {@link self::evaluateScalar()}
             return null;
         }
@@ -678,8 +683,12 @@ class Inline
         $i = $nextOffset;
 
         // Built-in tags
-        if ($tag && '!' === $tag[0]) {
+        if ('' !== $tag && '!' === $tag[0]) {
             throw new ParseException(sprintf('The built-in tag "!%s" is not implemented.', $tag), self::$parsedLineNumber + 1, $value, self::$parsedFilename);
+        }
+
+        if ('' !== $tag && !isset($value[$i])) {
+            throw new ParseException(sprintf('Missing value for tag "%s".', $tag), self::$parsedLineNumber + 1, $value, self::$parsedFilename);
         }
 
         if ('' === $tag || Yaml::PARSE_CUSTOM_TAGS & $flags) {
@@ -736,8 +745,6 @@ EOF;
 
     /**
      * Gets a regex that matches a YAML number in hexadecimal notation.
-     *
-     * @return string
      */
     private static function getHexRegex(): string
     {

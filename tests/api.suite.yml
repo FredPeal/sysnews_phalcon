@@ -3,4 +3,4 @@ modules:
    enabled:
        - REST:
            depends: PhpBrowser
-           url: 'http://localhost:8080'
+           url: 'http://sysnews_nginx'

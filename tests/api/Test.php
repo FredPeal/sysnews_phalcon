@@ -1,7 +1,7 @@
 <?php
     function generarToken()
     {
-        $client = new \GuzzleHttp\Client(['base_uri' => 'http://localhost:8080', ]);
+        $client = new \GuzzleHttp\Client(['base_uri' => 'http://sysnews_nginx', ]);
         $response = $client->post(
             '/auth/',
             [

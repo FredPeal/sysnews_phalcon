@@ -26,7 +26,6 @@ use JsonSerializable;
  */
 interface CollectionInterface extends Iterator, JsonSerializable
 {
-
     /**
      * Executes the passed callable for each of the elements in this collection
      * and passes both the value and key for them on each step.
@@ -868,7 +867,7 @@ interface CollectionInterface extends Iterator, JsonSerializable
 
     /**
      * Creates a new collection that when iterated will stop yielding results if
-     * the provided condition evaluates to false.
+     * the provided condition evaluates to true.
      *
      * This is handy for dealing with infinite iterators or any generator that
      * could start returning invalid elements at a certain point. For example,
@@ -893,7 +892,7 @@ interface CollectionInterface extends Iterator, JsonSerializable
      * ```
      *
      * @param callable $condition the method that will receive each of the elements and
-     * returns false when the iteration should be stopped.
+     * returns true when the iteration should be stopped.
      * If an array, it will be interpreted as a key-value list of conditions where
      * the key is a property path as accepted by `Collection::extract`,
      * and the value the condition against with each element will be matched.

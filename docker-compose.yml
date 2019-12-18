@@ -1,0 +1,57 @@
+version: "3"
+services: 
+  sysnews_api:
+    image: mctekk/phalconphp:latest
+    container_name: sysnews_api
+    restart: always
+    volumes: 
+      - .:/app 
+    working_dir: /app
+    ports: 
+      - 9001:9000
+    networks: 
+      - local-network
+  sysnews_nginx:
+    image: nginx:latest
+    container_name: sysnews_nginx
+    restart: always
+    ports: 
+      - 8080:80 
+    volumes: 
+      - .:/app
+      - ./docker/default.conf:/etc/nginx/conf.d/default.conf
+    networks: 
+      - public-network
+      - local-network
+  sysnews_mysql:
+    image: mariadb:10.4
+    container_name: sysnews_mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    env_file: .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+      - MYSQL_DATABASE=${DB_DATABASE}
+    volumes:
+      - "db-data:/var/lib/mysql"
+    networks: 
+      - local-network
+  sysnews_phpmyadmin:
+    depends_on:
+      - sysnews_mysql
+    image: phpmyadmin/phpmyadmin:4.8
+    ports:
+      - 9002:80
+    environment:
+      - PMA_HOST=sysnews_mysql
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+    env_file: .env
+    restart: always
+    networks:
+    - local-network
+volumes:
+  db-data:
+networks:
+  public-network:
+  local-network:
