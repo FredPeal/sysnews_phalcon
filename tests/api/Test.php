@@ -7,7 +7,7 @@
             [
                                                                 'form_params' => [
                                                                     'email' => 'Cantemir@contoso.com',
-                                                                    'pass' => 'Pop'
+                                                                    'password' => 'Pop'
                                                                 ]
                                                              ]
     );

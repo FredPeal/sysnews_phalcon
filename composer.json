@@ -1,15 +1,15 @@
 {
     "require-dev": {
         "phalcon/devtools": "^3.0.3",
-        "codeception/codeception": "^2.5",
-        "guzzlehttp/guzzle": "~6.0"
+        "codeception/codeception": "^2.5"
     },
     "require": {
         "robmorgan/phinx": "^0.10.6",
         "dmkit/phalcon-jwt-auth": "^1.0",
         "flow/jsonpath": "^0.4.0",
         "vlucas/phpdotenv": "^3.1",
-        "elasticsearch/elasticsearch": "~5.0"
+        "elasticsearch/elasticsearch": "~5.0",
+        "guzzlehttp/guzzle": "~6.0"
     },
     "autoload": {
         "psr-4": {"Sysnews\\Library\\":"library/"}
