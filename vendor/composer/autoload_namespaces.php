@@ -8,5 +8,4 @@ $baseDir = dirname($vendorDir);
 return array(
     'Flow\\JSONPath\\Test' => array($vendorDir . '/flow/jsonpath/tests'),
     'Flow\\JSONPath' => array($vendorDir . '/flow/jsonpath/src'),
-    'Behat\\Gherkin' => array($vendorDir . '/behat/gherkin/src'),
 );

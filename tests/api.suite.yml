@@ -1,6 +1,0 @@
-class_name: ApiTester
-modules:
-   enabled:
-       - REST:
-           depends: PhpBrowser
-           url: 'http://sysnews_nginx'
