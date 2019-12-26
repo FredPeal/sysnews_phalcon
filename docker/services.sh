@@ -1,0 +1,1 @@
+service mysql start && /etc/init.d/php7.2-fpm start && service nginx start && bash
