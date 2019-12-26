@@ -12,6 +12,7 @@ RUN apt-get install -y nginx vim
 COPY default.conf.prod /etc/nginx/sites-available/default
 RUN mkdir /app/
 RUN mkdir /startup/
+COPY mysql_secure.sh /startup/mysql_secure.sh
 COPY services.sh /startup/services.sh
 RUN apt-get install libpcre3-dev -y
 RUN curl -s https://packagecloud.io/install/repositories/phalcon/stable/script.deb.sh | bash
