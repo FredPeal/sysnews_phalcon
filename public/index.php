@@ -10,8 +10,7 @@ try {
     
     require __DIR__ . '/../config/loader.php';
     require __DIR__ . '/../config/services.php';
-    
-    // $uri = $di->getRouter()->getRewriteUri();
+    $uri = $di->getRouter()->getRewriteUri();
     
     $app = new \Phalcon\Mvc\Micro($di);
     
@@ -35,7 +34,7 @@ try {
             'trace' => !$config->app->production ? $e->getTraceAsString() : null,
         ],
     ]);
-    die($e->getMessage());
+    die($e->getTraceAsString());
 
     $logger = $di->get('log');
     $logger->log('Error', $e->getMessage());

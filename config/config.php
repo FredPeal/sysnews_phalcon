@@ -13,7 +13,7 @@ $settings = [
         'controllersDir' => '../app/controllers/',
         'modelsDir' => '../app/models/',
         'viewsDir' => '../app/views/',
-        'production' => 1,
+        'production' => env('PRODUCTION'),
     ],
     'jwt' => [
         'secretKey' => env('JWT_SECRET_KEY'),

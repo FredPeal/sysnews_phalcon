@@ -1,3 +1,5 @@
 vendor/
 logs/*
-.env sta
+.env
+.env.local
+.env.prod
