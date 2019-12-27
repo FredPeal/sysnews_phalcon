@@ -10,7 +10,7 @@ phases:
   pre_build:
     commands:
       - cp .env.example .env 
-      - docker build -t sysnews_api docker/.
+      - docker pull frederickpeal/sysnews_image:latest
   build:
     commands:
       - docker images
