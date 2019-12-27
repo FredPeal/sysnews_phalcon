@@ -14,7 +14,7 @@ phases:
   build:
     commands:
       - docker images
-      - docker run -d --name sysnews_api -p 8082:80 -v $(pwd):/app sysnews_image 
+      - docker run -d --name sysnews_api -p 8082:80 -v $(pwd):/app frederickpeal/sysnews_image:latest 
       - docker exec -it sysnews_api composer update --ignore-platform-reqs
       - docker exec -it sysnews_api vendor/bin/phinx migrate
       - docker exec -it sysnews_api vendor/bin/phpunit tests/SignUpTest.php --testdox
