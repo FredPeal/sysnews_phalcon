@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://127.0.0.1:2375 --storage-driver=overlay2&
+      - timeout 15 sh -c "until docker info; do echo .; sleep 1; done"
+  pre_build:
+    commands:
+      - cp .env.example .env 
+  build:
+    commands:
+      - docker images
+      - docker run -d --name sysnews_api -p 8082:80 -v $(pwd):/app sysnews_image 
+      - docker exec -it sysnews_api composer update --ignore-platform-reqs
+      - docker exec -it sysnews_api vendor/bin/phinx migrate
+      - docker exec -it sysnews_api vendor/bin/phpunit tests/SignUpTest.php --testdox

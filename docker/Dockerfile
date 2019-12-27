@@ -23,6 +23,6 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
     mv composer.phar /usr/local/bin/composer
 CMD ["/usr/bin/supervisord", "-n"]
 EXPOSE 80 9000 3306
-
+WORKDIR /app/
 
 

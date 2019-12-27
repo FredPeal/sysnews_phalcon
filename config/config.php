@@ -8,6 +8,7 @@ $settings = [
         'username' => env('DB_USER'),
         'password' => env('DB_PASS'),
         'dbname' => env('DB_DATABASE'),
+        'charset' => 'utf8'
     ],
      'app' => [
         'controllersDir' => '../app/controllers/',
