@@ -1,3 +1,5 @@
-vendor/*
+vendor/
 logs/*
 .env
+.env.local
+.env.prod

@@ -27,6 +27,25 @@ class Migration extends AbstractMigration
         }
     }
 
+    public function UpdateMapping(array $map)
+    {
+        $body = [
+            'properties' => [
+                'categoria' => [
+                    'properties' => [
+                        'noticias' => [
+                            'properties' => [
+                                'provincia' => [
+                                    'type' => 'string'
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ];
+    }
+
     /**
      * Undocumented function
      *
@@ -47,6 +66,31 @@ class Migration extends AbstractMigration
         } else {
             echo 'Ignorando actualizacion de Elasticsearch';
         }
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param string $indice
+     * @param string $type
+     * @param string $clave
+     * @param string $col
+     * @param mixed $dataType
+     * @return void
+     */
+    public function addToNestedDocument(int $id, string $indice, string $type, string $clave, string $col, $dataType = '')
+    {
+        $indice = $indice ? $indice : $this->indice;
+        $body = [
+            'index' => $indice,
+            'type' => $tipo,
+            'conflicts' => 'proceed',
+            'body' => [
+                'script' => [
+                    'inline' => "int total = 0;\nfor (int i = 0; i < ctx._source.$clave.length; ++i) {ctx._source.$clave[i].$col = $dataType}\nreturn total;"
+                ],
+            ]
+         ];
     }
 
     /**

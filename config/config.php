@@ -8,12 +8,13 @@ $settings = [
         'username' => env('DB_USER'),
         'password' => env('DB_PASS'),
         'dbname' => env('DB_DATABASE'),
+        'charset' => 'utf8'
     ],
      'app' => [
         'controllersDir' => '../app/controllers/',
         'modelsDir' => '../app/models/',
         'viewsDir' => '../app/views/',
-        'production' => 1,
+        'production' => env('PRODUCTION'),
     ],
     'jwt' => [
         'secretKey' => env('JWT_SECRET_KEY'),

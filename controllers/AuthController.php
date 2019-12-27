@@ -4,7 +4,7 @@ namespace Sysnews\Controllers;
 
 use Sysnews\Models\Users;
 use Phalcon\Http\Response;
-
+use Exception;
 class AuthController extends \Phalcon\Mvc\Controller
 {
     /**
@@ -17,11 +17,13 @@ class AuthController extends \Phalcon\Mvc\Controller
     {
         $email = $this->request->getPost('email', 'email');
         $pass = $this->request->getPost('pass', 'string');
+
         $user = Users::findFirst("email = '$email'");
         $response = new Response();
         $token = ['message' => 'Error de autenticacion'];
-
-        if (password_verify($pass, $user->pass)) {
+        $verify = password_verify($pass, $user->pass);
+        if ($verify) {
+            // print_r($verify); die;
             $token = $this->token($user->toArray());
         } else {
             throw new Exception('Pass incorrecto');

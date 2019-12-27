@@ -18,6 +18,10 @@ $users->post('/', 'store');
 $users->put('/{id}', 'update');
 $users->delete('/{id}', 'delete');
 $app->mount($users);
+$users->setPrefix('/auth');
+$users->setHandler(new \Sysnews\Controllers\UserController());
+$users->post('/user', 'store');
+$app->mount($users);
 
 //Auth
 $auth = new MicroCollection();
