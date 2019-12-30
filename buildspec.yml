@@ -18,12 +18,11 @@ phases:
       - docker exec sysnews_api composer update --ignore-platform-reqs
       - docker exec sysnews_api vendor/bin/phinx migrate
       - docker exec sysnews_api vendor/bin/phpunit tests/SignUpTest.php --testdox
-  artifacts:
-    type: zip
-    paths:
-      - './build/**/*'
-      - './cicd/**/*'
-
-  cache:
-    paths:
-      - './node_modules/**/*'
+artifacts:
+  type: zip
+  paths:
+    - './build/**/*'
+    - './cicd/**/*'
+cache:
+  paths:
+    - './node_modules/**/*'
