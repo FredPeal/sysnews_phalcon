@@ -21,7 +21,8 @@ phases:
 artifacts:
   type: zip
   paths:
-    - './'
+   - '**/*'
+
 cache:
   paths:
     - './vendor/'
